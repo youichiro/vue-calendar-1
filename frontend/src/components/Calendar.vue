@@ -26,7 +26,7 @@
       ></v-calendar>
     </v-sheet>
     <v-overlay :value="event !== null">
-      <Detail />
+      <DetailDialog />
     </v-overlay>
   </div>
 </template>
@@ -34,12 +34,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import moment from 'moment';
-import Detail from './Detail';
+import DetailDialog from './DetailDialog';
 
 export default {
   name: 'Calendar',
   components: {
-    Detail
+    DetailDialog
   },
   data: () => ({
     value: moment().format('yyyy-MM-DD')
