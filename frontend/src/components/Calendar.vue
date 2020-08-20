@@ -25,15 +25,22 @@
         @click:event="showEvent"
       ></v-calendar>
     </v-sheet>
+    <v-overlay :value="event !== null">
+      <Detail />
+    </v-overlay>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import moment from 'moment';
+import Detail from './Detail';
 
 export default {
   name: 'Calendar',
+  components: {
+    Detail
+  },
   data: () => ({
     value: moment().format('yyyy-MM-DD')
   }),
