@@ -1,6 +1,9 @@
 <template>
   <v-card light>
     <v-card-actions class="d-flex justify-end pa-2">
+      <v-btn icon @click="del">
+        <font-awesome-icon icon="trash" />
+      </v-btn>
       <v-btn icon @click="close">
         <v-icon>mdi-close</v-icon>
       </v-btn>
@@ -27,9 +30,12 @@ export default {
     ...mapGetters('events', ['event'])
   },
   methods: {
-    ...mapActions('events', ['resetEvent']),
+    ...mapActions('events', ['resetEvent', 'deleteEvent']),
     close() {
       this.resetEvent();
+    },
+    del() {
+      this.deleteEvent(this.event.id);
     }
   }
 };
