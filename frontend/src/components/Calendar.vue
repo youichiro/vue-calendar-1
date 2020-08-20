@@ -22,6 +22,7 @@
         :day-format="timestamp => new Date(timestamp.date).getDate()"
         :month-format="timestamp => new Date(timestamp.date).getMonth() + 1 + ' /'"
         @change="fetchEvents"
+        @click:event="showEvent"
       ></v-calendar>
     </v-sheet>
   </div>
@@ -37,18 +38,21 @@ export default {
     value: moment().format('yyyy-MM-DD')
   }),
   computed: {
-    ...mapGetters('events', ['events']),
+    ...mapGetters('events', ['events', 'event']),
     title() {
       return moment(this.value).format('yyyy年 M月');
     }
   },
   methods: {
-    ...mapActions('events', ['fetchEvents']),
+    ...mapActions('events', ['fetchEvents', 'setEvent']),
     getEventColor(event) {
       return event.color;
     },
     setToday() {
       this.value = moment().format('yyyy-MM-DD');
+    },
+    showEvent({ event }) {
+      this.setEvent(event);
     }
   }
 };
