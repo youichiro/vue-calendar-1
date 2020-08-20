@@ -7,10 +7,12 @@
       <v-btn icon @click="$refs.calendar.next()">
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-sheet>
     <v-sheet height="94vh">
       <v-calendar
         ref="calendar"
+        v-model="value"
         :events="events"
         :event-color="getEventColor"
         @change="fetchEvents"
@@ -21,11 +23,18 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import moment from 'moment';
 
 export default {
   name: 'Calendar',
+  data: () => ({
+    value: moment().format('yyyy-MM-DD')
+  }),
   computed: {
-    ...mapGetters('events', ['events'])
+    ...mapGetters('events', ['events']),
+    title() {
+      return moment(this.value).format('yyyy年 M月');
+    }
   },
   methods: {
     ...mapActions('events', ['fetchEvents']),
