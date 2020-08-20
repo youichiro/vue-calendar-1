@@ -18,6 +18,9 @@
         v-model="value"
         :events="events"
         :event-color="getEventColor"
+        locale="ja-jp"
+        :day-format="timestamp => new Date(timestamp.date).getDate()"
+        :month-format="timestamp => new Date(timestamp.date).getMonth() + 1 + ' /'"
         @change="fetchEvents"
       ></v-calendar>
     </v-sheet>
