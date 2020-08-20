@@ -20,7 +20,8 @@ const getters = {
 
 const mutations = {
   setEvents: (state, events) => (state.events = events),
-  setEvent: (state, event) => (state.event = event)
+  setEvent: (state, event) => (state.event = event),
+  resetEvent: state => (state.event = null)
 };
 
 const actions = {
@@ -30,6 +31,9 @@ const actions = {
   },
   setEvent({ commit }, event) {
     commit('setEvent', event);
+  },
+  resetEvent({ commit }) {
+    commit('resetEvent');
   }
 };
 
