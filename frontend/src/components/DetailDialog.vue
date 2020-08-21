@@ -1,6 +1,9 @@
 <template>
-  <v-card light>
+  <v-card light width="600">
     <v-card-actions class="d-flex justify-end pa-2">
+      <v-btn icon @click="edit">
+        <font-awesome-icon icon="edit" />
+      </v-btn>
       <v-btn icon @click="del">
         <font-awesome-icon icon="trash" />
       </v-btn>
@@ -30,12 +33,15 @@ export default {
     ...mapGetters('events', ['event'])
   },
   methods: {
-    ...mapActions('events', ['resetEvent', 'deleteEvent']),
+    ...mapActions('events', ['resetEvent', 'deleteEvent', 'setEditMode']),
     close() {
       this.resetEvent();
     },
     del() {
       this.deleteEvent(this.event.id);
+    },
+    edit() {
+      this.setEditMode(true);
     }
   }
 };
