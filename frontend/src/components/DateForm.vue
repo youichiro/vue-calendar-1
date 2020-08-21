@@ -10,7 +10,12 @@
         v-on="on"
       ></v-text-field>
     </template>
-    <v-date-picker v-model="date" no-title></v-date-picker>
+    <v-date-picker
+      v-model="date"
+      no-title
+      locale="ja-ja"
+      :day-format="date => new Date(date).getDate()"
+    ></v-date-picker>
   </v-menu>
 </template>
 
