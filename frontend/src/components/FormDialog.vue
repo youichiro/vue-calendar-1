@@ -6,7 +6,7 @@
       </v-btn>
     </v-card-actions>
     <v-card-text>
-      <v-text-field v-model="title" label="タイトル" required></v-text-field>
+      <v-text-field v-model="name" label="タイトル" required></v-text-field>
       <v-row no-gutters>
         <v-col><DateForm v-model="startDate" label="start date"/></v-col>
         <v-col><TimeForm v-model="startTime" label="start time"/></v-col>
@@ -17,6 +17,7 @@
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>
+      <v-btn :disabled="$v.$invalid" @click="submit">保存</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -34,12 +35,12 @@ export default {
   mixins: [validationMixin],
   components: { DateForm, TimeForm },
   validations: {
-    title: { required },
+    name: { required },
     startDate: { required },
     endDate: { required }
   },
   data: () => ({
-    title: '',
+    name: '',
     startDate: null,
     startTime: null,
     endDate: null,
@@ -50,21 +51,32 @@ export default {
     ...mapGetters('events', ['event'])
   },
   created() {
-    this.title = this.event.title;
-    this.startDate = moment(this.event.start).format('yyyy-MM-DD');
+    this.name = this.event.name;
+    this.startDate = this.event.start.getFullYear() + moment(this.event.start).format('-MM-DD');
     this.startTime = this.event.timed ? moment(this.event.start).format('HH:mm:ss') : null;
-    this.endDate = moment(this.event.end).format('yyyy-MM-DD');
+    this.endDate = this.event.start.getFullYear() + moment(this.event.end).format('-MM-DD');
     this.endTime = this.event.timed ? moment(this.event.end).format('HH:mm:ss') : null;
     this.description = this.event.description;
   },
   methods: {
-    ...mapActions('events', ['resetEvent', 'setEditMode']),
+    ...mapActions('events', ['updateEvent', 'resetEvent', 'setEditMode']),
     close() {
       this.resetEvent();
       this.setEditMode(false);
     },
     cancel() {
       this.setEditMode(false);
+    },
+    submit() {
+      const params = {
+        ...this.event,
+        name: this.name,
+        start: `${this.startDate} ${this.startTime}`,
+        end: `${this.endDate} ${this.endTime}`,
+        description: this.description
+      };
+      this.updateEvent(params);
+      this.close();
     }
   }
 };
