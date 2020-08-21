@@ -26,7 +26,8 @@
       ></v-calendar>
     </v-sheet>
     <v-overlay :value="event !== null">
-      <DetailDialog />
+      <DetailDialog v-if="!isEditMode" />
+      <FormDialog v-if="isEditMode" />
     </v-overlay>
   </div>
 </template>
@@ -35,17 +36,19 @@
 import { mapGetters, mapActions } from 'vuex';
 import moment from 'moment';
 import DetailDialog from './DetailDialog';
+import FormDialog from './FormDialog';
 
 export default {
   name: 'Calendar',
   components: {
-    DetailDialog
+    DetailDialog,
+    FormDialog
   },
   data: () => ({
     value: moment().format('yyyy-MM-DD')
   }),
   computed: {
-    ...mapGetters('events', ['events', 'event']),
+    ...mapGetters('events', ['events', 'event', 'isEditMode']),
     title() {
       return moment(this.value).format('yyyy年 M月');
     }
