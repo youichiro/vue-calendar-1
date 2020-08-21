@@ -7,8 +7,10 @@
     </v-card-actions>
     <v-card-text>
       <v-text-field v-model="title" label="タイトル" required></v-text-field>
-      <DateForm v-model="startDate" />
-      <TimeForm v-model="startTime" />
+      <DateForm v-model="startDate" label="start date" />
+      <TimeForm v-model="startTime" label="start time" />
+      <DateForm v-model="endDate" label="end date" />
+      <TimeForm v-model="endTime" label="end time" />
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>
@@ -17,33 +19,27 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
 import DateForm from './DateForm';
 import TimeForm from './TimeForm';
 
-import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'FormDialog',
   mixins: [validationMixin],
-  components: {
-    DateForm,
-    TimeForm
-  },
+  components: { DateForm, TimeForm },
   validations: {
     title: { required },
-    startDate: { required }
+    startDate: { required },
+    endDate: { required }
   },
   data: () => ({
     title: '',
-    startDate: {
-      value: null,
-      label: 'start date'
-    },
-    startTime: {
-      value: null,
-      label: 'start time'
-    }
+    startDate: null,
+    startTime: null,
+    endDate: null,
+    endTime: null
   }),
   computed: {
     ...mapGetters('events', ['event'])

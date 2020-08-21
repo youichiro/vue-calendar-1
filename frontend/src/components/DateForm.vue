@@ -2,7 +2,7 @@
   <v-menu transition="scale-transition" offset-y min-width="290px">
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        :label="value.label"
+        :label="label"
         :value="date"
         @input="data = $event.target.value"
         readonly
@@ -17,14 +17,14 @@
 <script>
 export default {
   name: 'DateForm',
-  props: ['value'],
+  props: ['value', 'label'],
   computed: {
     date: {
       get() {
-        return this.value.value;
+        return this.value;
       },
       set(value) {
-        this.$emit('input', { ...this.value, value });
+        this.$emit('input', value);
       }
     }
   }
