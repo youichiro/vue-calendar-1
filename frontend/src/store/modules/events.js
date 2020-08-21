@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const state = {
   events: [],
-  event: null
+  event: null,
+  isEditMode: false
 };
 
 const getters = {
@@ -15,14 +16,16 @@ const getters = {
         color: event.color || 'blue'
       };
     }),
-  event: state => state.event
+  event: state => state.event,
+  isEditMode: state => state.isEditMode
 };
 
 const mutations = {
   setEvents: (state, events) => (state.events = events),
   removeEvent: (state, event) => (state.events = state.events.filter(e => e.id !== event.id)),
   setEvent: (state, event) => (state.event = event),
-  resetEvent: state => (state.event = null)
+  resetEvent: state => (state.event = null),
+  setEditMode: (state, bool) => (state.isEditMode = bool)
 };
 
 const actions = {
@@ -40,6 +43,9 @@ const actions = {
   },
   resetEvent({ commit }) {
     commit('resetEvent');
+  },
+  setEditMode({ commit }, bool) {
+    commit('setEditMode', bool);
   }
 };
 
