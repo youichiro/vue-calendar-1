@@ -8,6 +8,7 @@
     <v-card-text>
       <v-text-field v-model="title" label="タイトル" required></v-text-field>
       <DateForm v-model="startDate" />
+      <TimeForm v-model="startTime" />
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>
@@ -19,13 +20,15 @@
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
 import DateForm from './DateForm';
+import TimeForm from './TimeForm';
 
 import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'FormDialog',
   mixins: [validationMixin],
   components: {
-    DateForm
+    DateForm,
+    TimeForm
   },
   validations: {
     title: { required },
@@ -36,6 +39,10 @@ export default {
     startDate: {
       value: null,
       label: 'start date'
+    },
+    startTime: {
+      value: null,
+      label: 'start time'
     }
   }),
   computed: {
