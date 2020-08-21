@@ -7,6 +7,7 @@
     </v-card-actions>
     <v-card-text>
       <v-text-field v-model="title" label="タイトル" required></v-text-field>
+      <DateForm v-model="startDate" />
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>
@@ -17,16 +18,25 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
-import { mapActions, mapGetters } from 'vuex';
+import DateForm from './DateForm';
 
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'FormDialog',
   mixins: [validationMixin],
+  components: {
+    DateForm
+  },
   validations: {
-    title: { required }
+    title: { required },
+    startDate: { required }
   },
   data: () => ({
-    title: ''
+    title: '',
+    startDate: {
+      value: null,
+      label: 'start date'
+    }
   }),
   computed: {
     ...mapGetters('events', ['event'])
