@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
         :label="label"
-        :value="date"
+        :value="formatDateToJa(date)"
         @input="data = $event.target.value"
         readonly
         v-bind="attrs"
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'DateForm',
   props: ['value', 'label'],
@@ -31,6 +33,15 @@ export default {
       set(value) {
         this.$emit('input', value);
       }
+    }
+  },
+  methods: {
+    formatDateToJa(date) {
+      if (date === null) {
+        return;
+      }
+      moment.updateLocale('ja', { weekdays: ['日', '月', '火', '水', '木', '金', '土'] });
+      return moment(date).format('M月D日 (dddd)');
     }
   }
 };
