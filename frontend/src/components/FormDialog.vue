@@ -26,7 +26,6 @@
 import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
-import moment from 'moment';
 import DateForm from './DateForm';
 import TimeForm from './TimeForm';
 
@@ -52,10 +51,10 @@ export default {
   },
   created() {
     this.name = this.event.name;
-    this.startDate = this.event.start.getFullYear() + moment(this.event.start).format('-MM-DD');
-    this.startTime = this.event.timed ? moment(this.event.start).format('HH:mm:ss') : null;
-    this.endDate = this.event.start.getFullYear() + moment(this.event.end).format('-MM-DD');
-    this.endTime = this.event.timed ? moment(this.event.end).format('HH:mm:ss') : null;
+    this.startDate = this.event.startDate;
+    this.startTime = this.event.startTime;
+    this.endDate = this.event.endDate;
+    this.endTime = this.event.endTime;
     this.description = this.event.description;
   },
   methods: {
