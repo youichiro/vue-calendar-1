@@ -68,6 +68,9 @@ export default {
       this.setEditMode(false);
     },
     submit() {
+      if (this.$v.$invalid) {
+        return;
+      }
       const params = {
         ...this.event,
         name: this.name,
