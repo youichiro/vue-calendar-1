@@ -23,6 +23,7 @@
         :month-format="timestamp => new Date(timestamp.date).getMonth() + 1 + ' /'"
         @change="fetchEvents"
         @click:event="showEvent"
+        @click:day="initEvent"
       ></v-calendar>
     </v-sheet>
     <v-overlay :value="event !== null">
@@ -54,7 +55,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('events', ['fetchEvents', 'setEvent']),
+    ...mapActions('events', ['fetchEvents', 'setEvent', 'setEditMode']),
     getEventColor(event) {
       return event.color;
     },
@@ -63,6 +64,14 @@ export default {
     },
     showEvent({ event }) {
       this.setEvent(event);
+    },
+    initEvent({ date }) {
+      this.setEvent({
+        name: '',
+        start: date,
+        end: date
+      });
+      this.setEditMode(true);
     }
   }
 };

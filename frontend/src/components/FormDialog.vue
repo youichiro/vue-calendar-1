@@ -58,7 +58,7 @@ export default {
     this.description = this.event.description;
   },
   methods: {
-    ...mapActions('events', ['updateEvent', 'resetEvent', 'setEditMode']),
+    ...mapActions('events', ['updateEvent', 'createEvent', 'resetEvent', 'setEditMode']),
     close() {
       this.resetEvent();
       this.setEditMode(false);
@@ -73,11 +73,16 @@ export default {
       const params = {
         ...this.event,
         name: this.name,
-        start: `${this.startDate} ${this.startTime}`,
-        end: `${this.endDate} ${this.endTime}`,
+        start: `${this.startDate} ${this.startTime || ''}`,
+        end: `${this.endDate} ${this.endTime | ''}`,
+        timed: this.startTime === null || this.endTime === null ? false : true,
         description: this.description
       };
-      this.updateEvent(params);
+      if (params.id) {
+        this.updateEvent(params);
+      } else {
+        this.createEvent(params);
+      }
       this.close();
     }
   }

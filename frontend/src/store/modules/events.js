@@ -18,6 +18,7 @@ const mutations = {
   removeEvent: (state, event) => (state.events = state.events.filter(e => e.id !== event.id)),
   updateEvent: (state, event) =>
     (state.events = state.events.map(e => (e.id === event.id ? event : e))),
+  appendEvent: (state, event) => (state.events = [...state.events, event]),
   setEvent: (state, event) => (state.event = event),
   resetEvent: state => (state.event = null),
   setEditMode: (state, bool) => (state.isEditMode = bool)
@@ -36,6 +37,10 @@ const actions = {
   async updateEvent({ commit }, event) {
     const response = await axios.put(`http://localhost:3000/events/${event.id}`, event);
     commit('updateEvent', response.data);
+  },
+  async createEvent({ commit }, event) {
+    const response = await axios.post(`http://localhost:3000/events`, event);
+    commit('appendEvent', response.data);
   },
   setEvent({ commit }, event) {
     commit('setEvent', event);
