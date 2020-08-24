@@ -62,8 +62,9 @@ export default {
     setToday() {
       this.value = moment().format('yyyy-MM-DD');
     },
-    showEvent({ event }) {
+    showEvent({ nativeEvent, event }) {
       this.setEvent(event);
+      nativeEvent.stopPropagation();
     },
     initEvent({ date }) {
       this.setEvent({
