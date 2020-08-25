@@ -11,9 +11,9 @@ export const serializeEvent = event => {
     start,
     end,
     color: event.color || 'blue',
-    startDate: start.getFullYear() + moment(event.start).format('-MM-DD'),
+    startDate: moment(event.start).format('YYYY-MM-DD'),
     startTime: event.timed ? moment(event.start).format('HH:mm:ss') : null,
-    endDate: end.getFullYear() + moment(event.end).format('-MM-DD'),
+    endDate: moment(event.end).format('YYYY-MM-DD'),
     endTime: event.timed ? moment(event.end).format('HH:mm:ss') : null
   };
 };

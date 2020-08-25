@@ -46,12 +46,12 @@ export default {
     FormDialog
   },
   data: () => ({
-    value: moment().format('yyyy-MM-DD')
+    value: moment().format('YYYY-MM-DD')
   }),
   computed: {
     ...mapGetters('events', ['events', 'event', 'isEditMode']),
     title() {
-      return moment(this.value).format('yyyy年 M月');
+      return moment(this.value).format('YYYY年 M月');
     }
   },
   methods: {
@@ -60,7 +60,7 @@ export default {
       return event.color;
     },
     setToday() {
-      this.value = moment().format('yyyy-MM-DD');
+      this.value = moment().format('YYYY-MM-DD');
     },
     showEvent({ nativeEvent, event }) {
       this.setEvent(event);
