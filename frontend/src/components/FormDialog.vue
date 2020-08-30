@@ -14,6 +14,7 @@
         <v-col><DateForm v-model="endDate" label="end date"/></v-col>
       </v-row>
       <v-textarea v-model="description" label="詳細"></v-textarea>
+      <ColorForm v-model="color" />
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>
@@ -28,11 +29,12 @@ import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
 import DateForm from './DateForm';
 import TimeForm from './TimeForm';
+import ColorForm from './ColorForm';
 
 export default {
   name: 'FormDialog',
   mixins: [validationMixin],
-  components: { DateForm, TimeForm },
+  components: { DateForm, TimeForm, ColorForm },
   validations: {
     name: { required },
     startDate: { required },
@@ -44,7 +46,8 @@ export default {
     startTime: null,
     endDate: null,
     endTime: null,
-    description: ''
+    description: '',
+    color: null
   }),
   computed: {
     ...mapGetters('events', ['event'])
@@ -56,6 +59,7 @@ export default {
     this.endDate = this.event.endDate;
     this.endTime = this.event.endTime;
     this.description = this.event.description;
+    this.color = this.event.color;
   },
   methods: {
     ...mapActions('events', ['updateEvent', 'createEvent', 'resetEvent', 'setEditMode']),
@@ -65,6 +69,9 @@ export default {
     },
     cancel() {
       this.setEditMode(false);
+      if (!this.event.id) {
+        this.resetEvent();
+      }
     },
     submit() {
       if (this.$v.$invalid) {
@@ -76,7 +83,8 @@ export default {
         start: `${this.startDate} ${this.startTime || ''}`,
         end: `${this.endDate} ${this.endTime | ''}`,
         timed: this.startTime === null || this.endTime === null ? false : true,
-        description: this.description
+        description: this.description,
+        color: this.color
       };
       if (params.id) {
         this.updateEvent(params);
