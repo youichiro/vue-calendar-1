@@ -22,6 +22,8 @@
 <script>
 import moment from 'moment';
 
+moment.locale('ja', { weekdays: ['日', '月', '火', '水', '木', '金', '土'] });
+
 export default {
   name: 'DateForm',
   props: ['value', 'label'],
@@ -40,7 +42,6 @@ export default {
       if (date === null) {
         return;
       }
-      moment.updateLocale('ja', { weekdays: ['日', '月', '火', '水', '木', '金', '土'] });
       return moment(date).format('M月D日 (dddd)');
     }
   }
