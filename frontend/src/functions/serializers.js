@@ -10,7 +10,7 @@ export const serializeEvent = event => {
     ...event,
     start,
     end,
-    color: event.color || 'blue',
+    color: event.color || '#2196F3',
     startDate: moment(event.start).format('YYYY-MM-DD'),
     startTime: event.timed ? moment(event.start).format('HH:mm:ss') : null,
     endDate: moment(event.end).format('YYYY-MM-DD'),
