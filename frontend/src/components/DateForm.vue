@@ -20,9 +20,7 @@
 </template>
 
 <script>
-import moment from 'moment';
-
-moment.locale('ja', { weekdays: ['日', '月', '火', '水', '木', '金', '土'] });
+import { formatDateToJa } from '../functions/formatters';
 
 export default {
   name: 'DateForm',
@@ -38,12 +36,7 @@ export default {
     }
   },
   methods: {
-    formatDateToJa(date) {
-      if (date === null) {
-        return;
-      }
-      return moment(date).format('M月D日 (dddd)');
-    }
+    formatDateToJa
   }
 };
 </script>
