@@ -1,9 +1,7 @@
 <template>
   <v-menu transition="scale-transition" offset-y min-width="290px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text block v-bind="attrs" v-on="on">
-        {{ time }}
-      </v-btn>
+      <v-btn text v-bind="attrs" v-on="on" class="pa-0">{{ time }}</v-btn>
     </template>
     <v-list max-height="300px">
       <v-list-item v-for="(t, index) in times" :key="index" @click="time = t">

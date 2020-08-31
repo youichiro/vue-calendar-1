@@ -6,19 +6,52 @@
       </v-btn>
     </v-card-actions>
     <v-card-text>
-      <v-text-field v-model="name" label="タイトル" required></v-text-field>
-      <v-row no-gutters>
-        <v-col><DateForm v-model="startDate"/></v-col>
-        <template v-if="!allDay">
-          <v-col><TimeForm v-model="startTime"/></v-col>
-          <v-col cols="1" class="overline text-center">〜</v-col>
-          <v-col><TimeForm v-model="endTime"/></v-col>
-        </template>
-        <v-col><DateForm v-model="endDate"/></v-col>
-        <v-col><v-checkbox v-model="allDay" label="終日"></v-checkbox></v-col>
+      <v-row>
+        <v-col cols="2" align-self="center" class="d-flex justify-center">
+          title
+        </v-col>
+        <v-col>
+          <v-text-field autofocus v-model="name" placeholder="タイトル" required></v-text-field>
+        </v-col>
       </v-row>
-      <v-textarea v-model="description" label="詳細"></v-textarea>
-      <ColorForm v-model="color" />
+      <v-row align="center">
+        <v-col cols="2" align-self="center" class="d-flex justify-center">
+          datetime
+        </v-col>
+        <v-col class="d-flex align-center">
+          <div><DateForm v-model="startDate" /></div>
+          <template v-if="!allDay">
+            <div><TimeForm v-model="startTime" /></div>
+            <div>~</div>
+            <div><TimeForm v-model="endTime" /></div>
+          </template>
+          <div><DateForm v-model="endDate" /></div>
+          <div><v-checkbox v-model="allDay" label="終日" class="ml-4"></v-checkbox></div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="2" align-self="center" class="d-flex justify-center">
+          description
+        </v-col>
+        <v-col>
+          <v-textarea
+            filled
+            rounded
+            auto-grow
+            v-model="description"
+            placeholder="詳細"
+            rows="4"
+          ></v-textarea>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="2" align-self="center" class="d-flex justify-center">
+          color
+        </v-col>
+        <v-col>
+          <ColorForm v-model="color" />
+        </v-col>
+      </v-row>
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>

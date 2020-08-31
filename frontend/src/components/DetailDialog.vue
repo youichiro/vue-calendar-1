@@ -41,6 +41,7 @@
         </v-col>
       </v-row>
     </v-card-text>
+    <div style="height: 52px"></div>
   </v-card>
 </template>
 
