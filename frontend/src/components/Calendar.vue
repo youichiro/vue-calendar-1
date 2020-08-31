@@ -70,7 +70,8 @@ export default {
       this.setEvent({
         name: '',
         start: date,
-        end: date
+        end: date,
+        timed: true
       });
       this.setEditMode(true);
     }
