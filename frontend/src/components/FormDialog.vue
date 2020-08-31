@@ -34,14 +34,7 @@
           description
         </v-col>
         <v-col>
-          <v-textarea
-            filled
-            rounded
-            auto-grow
-            v-model="description"
-            placeholder="詳細"
-            rows="4"
-          ></v-textarea>
+          <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
         </v-col>
       </v-row>
       <v-row>

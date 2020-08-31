@@ -4,11 +4,7 @@
       <template v-slot:activator="{ on, attrs }">
         <v-btn text v-bind="attrs" v-on="on">
           <font-awesome-icon icon="circle" :color="color" class="mr-2" style="font-size: 20px;" />
-          <font-awesome-icon
-            icon="caret-down"
-            color="rgba(0, 0, 0, 0.6)"
-            style="font-size: 16px;"
-          />
+          <font-awesome-icon icon="caret-down" color="rgba(0, 0, 0, 0.6)" style="font-size: 16px;" />
         </v-btn>
       </template>
       <v-color-picker v-model="color" hide-canvas hide-inputs show-swatches></v-color-picker>

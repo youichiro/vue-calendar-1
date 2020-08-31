@@ -16,8 +16,7 @@ const getters = {
 const mutations = {
   setEvents: (state, events) => (state.events = events),
   removeEvent: (state, event) => (state.events = state.events.filter(e => e.id !== event.id)),
-  updateEvent: (state, event) =>
-    (state.events = state.events.map(e => (e.id === event.id ? event : e))),
+  updateEvent: (state, event) => (state.events = state.events.map(e => (e.id === event.id ? event : e))),
   appendEvent: (state, event) => (state.events = [...state.events, event]),
   setEvent: (state, event) => (state.event = event),
   resetEvent: state => (state.event = null),

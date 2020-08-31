@@ -23,8 +23,5 @@ export const eventDateFormatter = event => {
   if (event.startDate === event.endDate) {
     return moment(event.start).format('M月D日(dddd) HH:mm 〜 ') + moment(event.end).format('HH:mm');
   }
-  return (
-    moment(event.start).format('M月D日(dddd) HH:mm 〜 ') +
-    moment(event.end).format('M月D日(dddd) HH:mm')
-  );
+  return moment(event.start).format('M月D日(dddd) HH:mm 〜 ') + moment(event.end).format('M月D日(dddd) HH:mm');
 };
