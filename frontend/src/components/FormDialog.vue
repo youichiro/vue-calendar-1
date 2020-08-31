@@ -9,10 +9,13 @@
       <v-text-field v-model="name" label="タイトル" required></v-text-field>
       <v-row no-gutters>
         <v-col><DateForm v-model="startDate"/></v-col>
-        <v-col><TimeForm v-model="startTime"/></v-col>
-        <v-col cols="1" class="overline text-center">〜</v-col>
-        <v-col><TimeForm v-model="endTime"/></v-col>
+        <template v-if="!allDay">
+          <v-col><TimeForm v-model="startTime"/></v-col>
+          <v-col cols="1" class="overline text-center">〜</v-col>
+          <v-col><TimeForm v-model="endTime"/></v-col>
+        </template>
         <v-col><DateForm v-model="endDate"/></v-col>
+        <v-col><v-checkbox v-model="allDay" label="終日"></v-checkbox></v-col>
       </v-row>
       <v-textarea v-model="description" label="詳細"></v-textarea>
       <ColorForm v-model="color" />
@@ -48,7 +51,8 @@ export default {
     endDate: null,
     endTime: null,
     description: '',
-    color: null
+    color: null,
+    allDay: false
   }),
   computed: {
     ...mapGetters('events', ['event'])
@@ -61,6 +65,7 @@ export default {
     this.endTime = this.event.endTime;
     this.description = this.event.description;
     this.color = this.event.color;
+    this.allDay = !this.event.timed;
   },
   methods: {
     ...mapActions('events', ['updateEvent', 'createEvent', 'resetEvent', 'setEditMode']),
@@ -83,7 +88,7 @@ export default {
         name: this.name,
         start: `${this.startDate} ${this.startTime || ''}`,
         end: `${this.endDate} ${this.endTime | ''}`,
-        timed: this.startTime === null || this.endTime === null ? false : true,
+        timed: !this.allDay,
         description: this.description,
         color: this.color
       };
