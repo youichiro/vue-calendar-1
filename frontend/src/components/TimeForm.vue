@@ -1,7 +1,7 @@
 <template>
   <v-menu transition="scale-transition" offset-y min-width="290px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text v-bind="attrs" v-on="on">
+      <v-btn text block v-bind="attrs" v-on="on">
         {{ time }}
       </v-btn>
     </template>

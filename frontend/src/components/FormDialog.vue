@@ -8,10 +8,11 @@
     <v-card-text>
       <v-text-field v-model="name" label="タイトル" required></v-text-field>
       <v-row no-gutters>
-        <v-col><DateForm v-model="startDate" label="start date"/></v-col>
-        <v-col><TimeForm v-model="startTime" label="start time"/></v-col>
-        <v-col><TimeForm v-model="endTime" label="end time"/></v-col>
-        <v-col><DateForm v-model="endDate" label="end date"/></v-col>
+        <v-col><DateForm v-model="startDate"/></v-col>
+        <v-col><TimeForm v-model="startTime"/></v-col>
+        <v-col cols="1" class="overline text-center">〜</v-col>
+        <v-col><TimeForm v-model="endTime"/></v-col>
+        <v-col><DateForm v-model="endDate"/></v-col>
       </v-row>
       <v-textarea v-model="description" label="詳細"></v-textarea>
       <ColorForm v-model="color" />

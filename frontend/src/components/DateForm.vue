@@ -2,12 +2,12 @@
   <v-menu transition="scale-transition" offset-y min-width="290px">
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        :label="label"
         :value="formatDateToJa(date)"
         @input="data = $event.target.value"
         readonly
         v-bind="attrs"
         v-on="on"
+        dense
       ></v-text-field>
     </template>
     <v-date-picker
