@@ -14,7 +14,6 @@ export const eventDateFormatter = event => {
   // 8月10日(月) 〜 11日(火)
   // 8月10日(月) 13:00 〜 14:00
   // 8月10日(月) 10:00 〜 8月11日(火) 11:00
-  console.log(event);
   if (!event.timed && event.startDate === event.endDate) {
     return moment(event.start).format('M月D日(dddd)');
   }
