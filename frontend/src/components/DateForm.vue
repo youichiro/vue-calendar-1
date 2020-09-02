@@ -1,7 +1,7 @@
 <template>
   <v-menu transition="scale-transition" offset-y min-width="290px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text block v-bind="attrs" v-on="on" class="pa-0">{{ formatDateToJa(date) }}</v-btn>
+      <v-btn text block v-bind="attrs" v-on="on" class="pa-2">{{ formatDateToJa(date) }}</v-btn>
     </template>
     <v-date-picker
       v-model="date"

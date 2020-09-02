@@ -16,6 +16,9 @@
           <div>~</div>
           <div><TimeForm v-model="endTime" /></div>
         </template>
+        <template v-else>
+          <div class="px-4">~</div>
+        </template>
         <div><DateForm v-model="endDate" /></div>
         <div><v-checkbox v-model="allDay" label="終日" class="ml-4"></v-checkbox></div>
       </DialogSection>
