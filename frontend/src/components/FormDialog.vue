@@ -6,45 +6,25 @@
       </v-btn>
     </v-card-actions>
     <v-card-text>
-      <v-row>
-        <v-col cols="2" align-self="center" class="d-flex justify-center">
-          title
-        </v-col>
-        <v-col>
-          <v-text-field autofocus v-model="name" placeholder="タイトル" required></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row align="center">
-        <v-col cols="2" align-self="center" class="d-flex justify-center">
-          datetime
-        </v-col>
-        <v-col class="d-flex align-center">
-          <div><DateForm v-model="startDate" /></div>
-          <template v-if="!allDay">
-            <div><TimeForm v-model="startTime" /></div>
-            <div>~</div>
-            <div><TimeForm v-model="endTime" /></div>
-          </template>
-          <div><DateForm v-model="endDate" /></div>
-          <div><v-checkbox v-model="allDay" label="終日" class="ml-4"></v-checkbox></div>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="2" align-self="center" class="d-flex justify-center">
-          description
-        </v-col>
-        <v-col>
-          <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="2" align-self="center" class="d-flex justify-center">
-          color
-        </v-col>
-        <v-col>
-          <ColorForm v-model="color" />
-        </v-col>
-      </v-row>
+      <DialogSection icon="square" :color="color">
+        <v-text-field autofocus v-model="name" label="タイトル" required></v-text-field>
+      </DialogSection>
+      <DialogSection icon="calendar-day">
+        <div><DateForm v-model="startDate" /></div>
+        <template v-if="!allDay">
+          <div><TimeForm v-model="startTime" /></div>
+          <div>~</div>
+          <div><TimeForm v-model="endTime" /></div>
+        </template>
+        <div><DateForm v-model="endDate" /></div>
+        <div><v-checkbox v-model="allDay" label="終日" class="ml-4"></v-checkbox></div>
+      </DialogSection>
+      <DialogSection icon="align-left">
+        <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
+      </DialogSection>
+      <DialogSection icon="palette">
+        <ColorForm v-model="color" />
+      </DialogSection>
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>
@@ -60,11 +40,12 @@ import { required } from 'vuelidate/lib/validators';
 import DateForm from './DateForm';
 import TimeForm from './TimeForm';
 import ColorForm from './ColorForm';
+import DialogSection from './DialogSection';
 
 export default {
   name: 'FormDialog',
   mixins: [validationMixin],
-  components: { DateForm, TimeForm, ColorForm },
+  components: { DateForm, TimeForm, ColorForm, DialogSection },
   validations: {
     name: { required },
     startDate: { required },

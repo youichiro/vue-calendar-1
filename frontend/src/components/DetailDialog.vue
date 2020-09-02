@@ -12,34 +12,13 @@
       </v-btn>
     </v-card-actions>
     <v-card-title>
-      <v-row>
-        <v-col cols="2" align-self="center" class="d-flex justify-center">
-          <font-awesome-icon icon="square" :color="event.color" style="font-size: 20px;" />
-        </v-col>
-        <v-col>
-          {{ event.name }}
-        </v-col>
-      </v-row>
+      <DialogSection icon="square" :color="event.color">{{ event.name }}</DialogSection>
     </v-card-title>
     <v-card-text>
-      <v-row>
-        <v-col cols="2" align-self="center" class="d-flex justify-center">
-          <font-awesome-icon icon="calendar-day" style="font-size: 20px;" />
-        </v-col>
-        <v-col>
-          {{ dateText }}
-        </v-col>
-      </v-row>
+      <DialogSection icon="calendar-day">{{ dateText }}</DialogSection>
     </v-card-text>
     <v-card-text>
-      <v-row>
-        <v-col cols="2" align-self="center" class="d-flex justify-center">
-          <font-awesome-icon icon="align-left" style="font-size: 20px;" />
-        </v-col>
-        <v-col>
-          {{ event.description || 'no description' }}
-        </v-col>
-      </v-row>
+      <DialogSection icon="align-left">{{ event.description || 'no description' }}</DialogSection>
     </v-card-text>
     <div style="height: 52px"></div>
   </v-card>
@@ -48,9 +27,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { eventDateFormatter } from '../functions/formatters';
+import DialogSection from './DialogSection';
 
 export default {
   name: 'Detail',
+  components: { DialogSection },
   computed: {
     ...mapGetters('events', ['event']),
     dateText() {
