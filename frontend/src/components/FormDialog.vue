@@ -14,12 +14,12 @@
         <template v-if="!allDay">
           <div><TimeForm v-model="startTime" /></div>
           <div>~</div>
-          <div><TimeForm v-model="endTime" /></div>
+          <div v-bind:class="{ 'red lighten-4 rounded': !isGreaterEnd }"><TimeForm v-model="endTime" /></div>
         </template>
         <template v-else>
           <div class="px-4">~</div>
         </template>
-        <div><DateForm v-model="endDate" /></div>
+        <div :class="{ 'red lighten-4 rounded': !isGreaterEnd }"><DateForm v-model="endDate" /></div>
         <div><v-checkbox v-model="allDay" label="終日" class="ml-4"></v-checkbox></div>
       </DialogSection>
       <DialogSection icon="align-left">
@@ -31,12 +31,13 @@
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn @click="cancel">キャンセル</v-btn>
-      <v-btn :disabled="$v.$invalid" @click="submit">保存</v-btn>
+      <v-btn :disabled="$v.$invalid || !isGreaterEnd" @click="submit">保存</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import moment from 'moment';
 import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
@@ -65,7 +66,12 @@ export default {
     allDay: false
   }),
   computed: {
-    ...mapGetters('events', ['event'])
+    ...mapGetters('events', ['event']),
+    isGreaterEnd() {
+      const start = this.allDay ? moment(this.startDate) : moment(`${this.startDate} ${this.startTime}`);
+      const end = this.allDay ? moment(this.endDate) : moment(`${this.endDate} ${this.endTime}`);
+      return this.allDay ? end >= start : end > start;
+    }
   },
   created() {
     this.name = this.event.name;
