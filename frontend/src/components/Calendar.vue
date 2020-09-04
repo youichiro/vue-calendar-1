@@ -67,10 +67,12 @@ export default {
       nativeEvent.stopPropagation();
     },
     initEvent({ date }) {
+      const currentTime = moment().format('HH:mm:ss');
+      let datetime = moment(`${date} ${currentTime}`);
       this.setEvent({
         name: '',
-        start: date,
-        end: date,
+        start: `${datetime.add(1, 'h').format('YYYY-MM-DD HH')}:00:00`,
+        end: `${datetime.add(1, 'h').format('YYYY-MM-DD HH')}:00:00`,
         timed: true
       });
       this.setEditMode(true);
