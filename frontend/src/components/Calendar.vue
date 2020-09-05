@@ -22,11 +22,15 @@
         @change="fetchEvents"
         @click:event="showEvent"
         @click:day="initEvent"
+        @click:more="showMoreEvents"
       ></v-calendar>
     </v-sheet>
     <v-overlay :value="event !== null">
       <DetailDialog v-if="!isEditMode" />
       <FormDialog v-if="isEditMode" />
+    </v-overlay>
+    <v-overlay :value="clickedDate !== null">
+      <MoreEvents />
     </v-overlay>
   </div>
 </template>
@@ -36,24 +40,22 @@ import { mapGetters, mapActions } from 'vuex';
 import moment from 'moment';
 import DetailDialog from './DetailDialog';
 import FormDialog from './FormDialog';
+import MoreEvents from './MoreEvents';
 
 export default {
   name: 'Calendar',
-  components: {
-    DetailDialog,
-    FormDialog
-  },
+  components: { DetailDialog, FormDialog, MoreEvents },
   data: () => ({
     value: moment().format('YYYY-MM-DD')
   }),
   computed: {
-    ...mapGetters('events', ['events', 'event', 'isEditMode']),
+    ...mapGetters('events', ['events', 'event', 'isEditMode', 'clickedDate']),
     title() {
       return moment(this.value).format('YYYY年 M月');
     }
   },
   methods: {
-    ...mapActions('events', ['fetchEvents', 'setEvent', 'setEditMode']),
+    ...mapActions('events', ['fetchEvents', 'setEvent', 'setEditMode', 'setClickedDate']),
     getEventColor(event) {
       return event.color;
     },
@@ -65,6 +67,9 @@ export default {
       nativeEvent.stopPropagation();
     },
     initEvent({ date }) {
+      if (this.clickedDate !== null) {
+        return;
+      }
       const currentTime = moment().format('HH:mm:ss');
       let datetime = moment(`${date} ${currentTime}`);
       this.setEvent({
@@ -74,6 +79,9 @@ export default {
         timed: true
       });
       this.setEditMode(true);
+    },
+    showMoreEvents({ date }) {
+      this.setClickedDate(date);
     }
   }
 };
