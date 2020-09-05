@@ -1,9 +1,7 @@
 <template>
   <div>
     <v-sheet tile height="6vh" color="grey lighten-3" class="d-flex align-center">
-      <v-btn outlined small class="ma-4" @click="setToday">
-        今日
-      </v-btn>
+      <v-btn outlined small class="ma-4" @click="setToday">今日</v-btn>
       <v-btn icon @click="$refs.calendar.prev()">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
