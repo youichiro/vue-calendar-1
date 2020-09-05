@@ -4,13 +4,15 @@ import { serializeEvent } from '../../functions/serializers';
 const state = {
   events: [],
   event: null,
-  isEditMode: false
+  isEditMode: false,
+  clickedDate: null
 };
 
 const getters = {
   events: state => state.events.map(event => serializeEvent(event)),
   event: state => serializeEvent(state.event),
-  isEditMode: state => state.isEditMode
+  isEditMode: state => state.isEditMode,
+  clickedDate: state => state.clickedDate
 };
 
 const mutations = {
@@ -20,7 +22,8 @@ const mutations = {
   appendEvent: (state, event) => (state.events = [...state.events, event]),
   setEvent: (state, event) => (state.event = event),
   resetEvent: state => (state.event = null),
-  setEditMode: (state, bool) => (state.isEditMode = bool)
+  setEditMode: (state, bool) => (state.isEditMode = bool),
+  setClickedDate: (state, date) => (state.clickedDate = date)
 };
 
 const actions = {
@@ -49,6 +52,9 @@ const actions = {
   },
   setEditMode({ commit }, bool) {
     commit('setEditMode', bool);
+  },
+  setClickedDate({ commit }, date) {
+    commit('setClickedDate', date);
   }
 };
 
