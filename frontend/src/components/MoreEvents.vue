@@ -1,11 +1,42 @@
 <template>
   <v-card light width="600">
-    <v-card-title>more events components</v-card-title>
+    <v-card-actions class="d-flex justify-end pa-2">
+      <v-btn icon @click="close">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-card-actions>
+    <v-card-text>
+      <v-list>
+        <v-list-item v-for="(event, i) in eventsFilterByDate" :key="i">
+          <v-list-item-content class="pa-0">
+            <v-btn depressed :color="event.color" class="white--text justify-start">
+              <template v-if="event.timed">
+                {{ formatTimeToJa(event.startTime) }}
+              </template>
+              {{ event.name }}
+            </v-btn>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+import { formatTimeToJa } from '../functions/formatters';
+
 export default {
-  name: 'MoreEvents'
+  name: 'MoreEvents',
+  computed: {
+    ...mapGetters('events', ['eventsFilterByDate'])
+  },
+  methods: {
+    ...mapActions('events', ['setClickedDate']),
+    close() {
+      this.setClickedDate(null);
+    },
+    formatTimeToJa
+  }
 };
 </script>

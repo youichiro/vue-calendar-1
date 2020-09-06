@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import { serializeEvent } from '../../functions/serializers';
 
 const state = {
@@ -11,6 +12,16 @@ const state = {
 const getters = {
   events: state => state.events.map(event => serializeEvent(event)),
   event: state => serializeEvent(state.event),
+  eventsFilterByDate: state => {
+    return state.events
+      .map(event => serializeEvent(event))
+      .filter(
+        event =>
+          event.startDate === state.clickedDate ||
+          event.endDate === state.clickedDate ||
+          moment(state.clickedDate).isBetween(event.startDate, event.endDate)
+      );
+  },
   isEditMode: state => state.isEditMode,
   clickedDate: state => state.clickedDate
 };

@@ -25,3 +25,10 @@ export const eventDateFormatter = event => {
   }
   return moment(event.start).format('M月D日(dddd) HH:mm 〜 ') + moment(event.end).format('M月D日(dddd) HH:mm');
 };
+
+export const formatTimeToJa = time => {
+  if (time === null) {
+    return;
+  }
+  return moment(`2020-10-01 ${time}`).format('H時');
+};
