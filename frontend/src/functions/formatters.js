@@ -3,6 +3,8 @@ import moment from 'moment';
 moment.locale('ja', { weekdays: ['日', '月', '火', '水', '木', '金', '土'] });
 
 export const formatDateToJa = date => {
+  // date: '2020-10-01'
+  // return: '10月1日 (水)'
   if (date === null) {
     return;
   }
@@ -27,6 +29,8 @@ export const eventDateFormatter = event => {
 };
 
 export const formatTimeToJa = time => {
+  // time: '09:00'
+  // return: '9時'
   if (time === null) {
     return;
   }
