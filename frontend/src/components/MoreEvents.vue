@@ -5,6 +5,9 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-card-actions>
+    <v-card-title class="d-flex justify-center">
+      {{ formatDateToJa(clickedDate) }}
+    </v-card-title>
     <v-card-text>
       <v-list>
         <v-list-item v-for="(event, i) in eventsFilterByDate" :key="i">
@@ -24,18 +27,19 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { formatTimeToJa } from '../functions/formatters';
+import { formatDateToJa, formatTimeToJa } from '../functions/formatters';
 
 export default {
   name: 'MoreEvents',
   computed: {
-    ...mapGetters('events', ['eventsFilterByDate'])
+    ...mapGetters('events', ['eventsFilterByDate', 'clickedDate'])
   },
   methods: {
     ...mapActions('events', ['setClickedDate']),
     close() {
       this.setClickedDate(null);
     },
+    formatDateToJa,
     formatTimeToJa
   }
 };
