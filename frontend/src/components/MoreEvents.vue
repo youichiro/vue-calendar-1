@@ -10,7 +10,7 @@
     </v-card-title>
     <v-card-text>
       <v-list>
-        <v-list-item v-for="(event, i) in eventsFilterByDate" :key="i">
+        <v-list-item v-for="(event, i) in eventsFilterByDate" :key="i" @click="showEvent(event)">
           <v-list-item-content class="pa-0">
             <v-btn depressed :color="event.color" class="white--text justify-start">
               <template v-if="event.timed">
@@ -35,12 +35,16 @@ export default {
     ...mapGetters('events', ['eventsFilterByDate', 'clickedDate'])
   },
   methods: {
-    ...mapActions('events', ['setClickedDate']),
+    formatDateToJa,
+    formatTimeToJa,
+    ...mapActions('events', ['setEvent', 'setClickedDate']),
     close() {
       this.setClickedDate(null);
     },
-    formatDateToJa,
-    formatTimeToJa
+    showEvent(event) {
+      this.close();
+      this.setEvent(event);
+    }
   }
 };
 </script>
