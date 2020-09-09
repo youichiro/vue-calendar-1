@@ -1,11 +1,21 @@
 import axios from 'axios';
 
 const state = {
-  calendars: []
+  calendars: [],
+  calendar: null
 };
 
 const getters = {
-  calendars: state => state.calendars
+  calendars: state =>
+    state.calendars.map(calendar => {
+      return { ...calendar, color: calendar.color || '#2196F3' };
+    }),
+  calendar: state => {
+    if (state.calendar === null) {
+      return null;
+    }
+    return { ...state.calendar, color: state.calendar.color || '#2196F3' };
+  }
 };
 
 const mutations = {
