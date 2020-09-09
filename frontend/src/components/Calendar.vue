@@ -10,20 +10,25 @@
       </v-btn>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-sheet>
-    <v-sheet height="94vh">
-      <v-calendar
-        ref="calendar"
-        v-model="value"
-        :events="events"
-        :event-color="getEventColor"
-        locale="ja-jp"
-        :day-format="timestamp => new Date(timestamp.date).getDate()"
-        :month-format="timestamp => new Date(timestamp.date).getMonth() + 1 + ' /'"
-        @change="fetchEvents"
-        @click:event="showEvent"
-        @click:day="initEvent"
-        @click:more="showMoreEvents"
-      ></v-calendar>
+    <v-sheet height="94vh" class="d-flex">
+      <v-sheet width="200px">
+        <CalendarList />
+      </v-sheet>
+      <v-sheet class="flex">
+        <v-calendar
+          ref="calendar"
+          v-model="value"
+          :events="events"
+          :event-color="getEventColor"
+          locale="ja-jp"
+          :day-format="timestamp => new Date(timestamp.date).getDate()"
+          :month-format="timestamp => new Date(timestamp.date).getMonth() + 1 + ' /'"
+          @change="fetchEvents"
+          @click:event="showEvent"
+          @click:day="initEvent"
+          @click:more="showMoreEvents"
+        ></v-calendar>
+      </v-sheet>
     </v-sheet>
     <v-overlay :value="event !== null">
       <DetailDialog v-if="!isEditMode" />
@@ -41,10 +46,11 @@ import moment from 'moment';
 import DetailDialog from './DetailDialog';
 import FormDialog from './FormDialog';
 import MoreEvents from './MoreEvents';
+import CalendarList from './CalendarList';
 
 export default {
   name: 'Calendar',
-  components: { DetailDialog, FormDialog, MoreEvents },
+  components: { DetailDialog, FormDialog, MoreEvents, CalendarList },
   data: () => ({
     value: moment().format('YYYY-MM-DD')
   }),
