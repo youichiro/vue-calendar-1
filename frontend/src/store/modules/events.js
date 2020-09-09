@@ -43,7 +43,7 @@ const actions = {
     commit('updateEvent', response.data);
   },
   async createEvent({ commit }, event) {
-    const response = await axios.post(`http://localhost:3000/events`, event);
+    const response = await axios.post('http://localhost:3000/events', event);
     commit('appendEvent', response.data);
   },
   setEvent({ commit }, event) {
