@@ -26,7 +26,7 @@
         <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
       </DialogSection>
       <DialogSection icon="calendar">
-        <CalendarSelectForm />
+        <CalendarSelectForm v-model="calendar" />
       </DialogSection>
       <DialogSection icon="palette">
         <ColorForm v-model="color" />
@@ -67,7 +67,8 @@ export default {
     endTime: null,
     description: '',
     color: null,
-    allDay: false
+    allDay: false,
+    calendar: null
   }),
   computed: {
     ...mapGetters('events', ['event']),
@@ -86,6 +87,7 @@ export default {
     this.description = this.event.description;
     this.color = this.event.color;
     this.allDay = !this.event.timed;
+    this.calendar = this.event.calendar;
   },
   methods: {
     ...mapActions('events', ['updateEvent', 'createEvent', 'resetEvent', 'setEditMode']),
