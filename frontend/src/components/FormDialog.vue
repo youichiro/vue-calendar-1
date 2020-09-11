@@ -57,7 +57,8 @@ export default {
   validations: {
     name: { required },
     startDate: { required },
-    endDate: { required }
+    endDate: { required },
+    calendar: { required }
   },
   data: () => ({
     name: '',
@@ -112,7 +113,8 @@ export default {
         end: `${this.endDate} ${this.endTime | ''}`,
         timed: !this.allDay,
         description: this.description,
-        color: this.color
+        color: this.color,
+        calendar_id: this.calendar.id
       };
       if (params.id) {
         this.updateEvent(params);
