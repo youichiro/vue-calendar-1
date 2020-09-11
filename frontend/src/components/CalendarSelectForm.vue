@@ -1,7 +1,7 @@
 <template>
   <v-menu transition="scale-transition" offset-y>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text v-bind="attrs" v-on="on" class="pa-0">{{ calendar }}</v-btn>
+      <v-btn text v-bind="attrs" v-on="on" class="pa-0">{{ calendar ? calendar.name : '' }}</v-btn>
     </template>
     <v-list max-height="300px">
       <v-list-item v-for="(c, i) in calendars" :key="i" @click="calendar = c">
@@ -17,13 +17,13 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'CalendarSelectForm',
   props: ['value'],
-  created() {
-    this.calendar = this.calendar ? this.calendar.name : this.calendars[0].name;
-  },
   computed: {
     ...mapGetters('calendars', ['calendars']),
     calendar: {
       get() {
+        if (!this.value) {
+          this.$emit('input', this.calendars[0]);
+        }
         return this.value;
       },
       set(value) {
