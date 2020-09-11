@@ -25,6 +25,9 @@
       <DialogSection icon="textarea">
         <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
       </DialogSection>
+      <DialogSection>
+        <CalendarSelectForm />
+      </DialogSection>
       <DialogSection icon="palette">
         <ColorForm v-model="color" />
       </DialogSection>
@@ -45,11 +48,12 @@ import DateForm from './DateForm';
 import TimeForm from './TimeForm';
 import ColorForm from './ColorForm';
 import DialogSection from './DialogSection';
+import CalendarSelectForm from './CalendarSelectForm';
 
 export default {
   name: 'FormDialog',
   mixins: [validationMixin],
-  components: { DateForm, TimeForm, ColorForm, DialogSection },
+  components: { DateForm, TimeForm, ColorForm, DialogSection, CalendarSelectForm },
   validations: {
     name: { required },
     startDate: { required },
