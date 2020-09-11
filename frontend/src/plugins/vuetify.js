@@ -19,7 +19,8 @@ export default new Vuetify({
       close: 'mdi-close',
       arrowLeft: 'mdi-chevron-left',
       arrowRight: 'mdi-chevron-right',
-      arrowDown: 'fas fa-caret-down'
+      arrowDown: 'fas fa-caret-down',
+      clock: 'far fa-clock'
     }
   }
 });

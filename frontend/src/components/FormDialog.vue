@@ -9,7 +9,7 @@
       <DialogSection icon="squareSolid" :color="color">
         <v-text-field autofocus v-model="name" label="タイトル" required></v-text-field>
       </DialogSection>
-      <DialogSection icon="calendar">
+      <DialogSection icon="clock">
         <div><DateForm v-model="startDate" /></div>
         <template v-if="!allDay">
           <div><TimeForm v-model="startTime" /></div>
@@ -25,7 +25,7 @@
       <DialogSection icon="textarea">
         <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
       </DialogSection>
-      <DialogSection>
+      <DialogSection icon="calendar">
         <CalendarSelectForm />
       </DialogSection>
       <DialogSection icon="palette">
