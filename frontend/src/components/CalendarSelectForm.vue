@@ -1,7 +1,7 @@
 <template>
   <v-menu transition="scale-transition" offset-y>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text v-bind="attrs" v-on="on" class="pa-0">{{ calendar ? calendar.name : '' }}</v-btn>
+      <v-btn depressed v-bind="attrs" v-on="on" class="pa-0">{{ calendar ? calendar.name : '' }}</v-btn>
     </template>
     <v-list max-height="300px">
       <v-list-item v-for="(c, i) in calendars" :key="i" @click="calendar = c">
