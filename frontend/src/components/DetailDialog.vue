@@ -2,23 +2,23 @@
   <v-card light width="600">
     <v-card-actions class="d-flex justify-end pa-2">
       <v-btn icon @click="edit">
-        <font-awesome-icon icon="edit" />
+        <v-icon size="20px">$edit</v-icon>
       </v-btn>
       <v-btn icon @click="del">
-        <font-awesome-icon icon="trash" />
+        <v-icon size="20px">$trash</v-icon>
       </v-btn>
       <v-btn icon @click="close">
-        <v-icon>mdi-close</v-icon>
+        <v-icon size="20px">$close</v-icon>
       </v-btn>
     </v-card-actions>
     <v-card-title>
-      <DialogSection icon="square" :color="event.color">{{ event.name }}</DialogSection>
+      <DialogSection icon="squareSolid" :color="event.color">{{ event.name }}</DialogSection>
     </v-card-title>
     <v-card-text>
-      <DialogSection icon="calendar-day">{{ dateText }}</DialogSection>
+      <DialogSection icon="calendar">{{ dateText }}</DialogSection>
     </v-card-text>
     <v-card-text>
-      <DialogSection icon="align-left">{{ event.description || 'no description' }}</DialogSection>
+      <DialogSection icon="textarea">{{ event.description || 'no description' }}</DialogSection>
     </v-card-text>
     <div style="height: 52px"></div>
   </v-card>

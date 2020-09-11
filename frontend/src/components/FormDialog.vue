@@ -2,14 +2,14 @@
   <v-card light width="600">
     <v-card-actions class="d-flex justify-end pa-2">
       <v-btn icon @click="close">
-        <v-icon>mdi-close</v-icon>
+        <v-icon>$close</v-icon>
       </v-btn>
     </v-card-actions>
     <v-card-text>
-      <DialogSection icon="square" :color="color">
+      <DialogSection icon="squareSolid" :color="color">
         <v-text-field autofocus v-model="name" label="タイトル" required></v-text-field>
       </DialogSection>
-      <DialogSection icon="calendar-day">
+      <DialogSection icon="calendar">
         <div><DateForm v-model="startDate" /></div>
         <template v-if="!allDay">
           <div><TimeForm v-model="startTime" /></div>
@@ -22,7 +22,7 @@
         <div :class="{ 'red lighten-4 rounded': !isGreaterEnd }"><DateForm v-model="endDate" /></div>
         <div><v-checkbox v-model="allDay" label="終日" class="ml-4"></v-checkbox></div>
       </DialogSection>
-      <DialogSection icon="align-left">
+      <DialogSection icon="textarea">
         <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
       </DialogSection>
       <DialogSection icon="palette">

@@ -3,10 +3,10 @@
     <v-sheet tile height="6vh" color="grey lighten-3" class="d-flex align-center">
       <v-btn outlined small class="ma-4" @click="setToday">今日</v-btn>
       <v-btn icon @click="$refs.calendar.prev()">
-        <v-icon>mdi-chevron-left</v-icon>
+        <v-icon>$arrowLeft</v-icon>
       </v-btn>
       <v-btn icon @click="$refs.calendar.next()">
-        <v-icon>mdi-chevron-right</v-icon>
+        <v-icon>$arrowRight</v-icon>
       </v-btn>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-sheet>

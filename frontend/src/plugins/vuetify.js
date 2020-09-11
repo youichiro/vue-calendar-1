@@ -8,7 +8,18 @@ export default new Vuetify({
   icons: {
     iconfont: 'fa',
     values: {
-      cancel: 'fas fa-ban',
+      squareRegular: 'far fa-square',
+      squareSolid: 'fas fa-square',
+      circleSolid: 'fas fa-circle',
+      edit: 'fas fa-edit',
+      trash: 'fas fa-trash',
+      calendar: 'fas fa-calendar-day',
+      palette: 'fas fa-palette',
+      textarea: 'fas fa-align-left',
+      close: 'mdi-close',
+      arrowLeft: 'mdi-chevron-left',
+      arrowRight: 'mdi-chevron-right',
+      arrowDown: 'fas fa-caret-down'
     }
   }
 });
