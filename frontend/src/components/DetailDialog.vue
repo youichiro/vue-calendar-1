@@ -15,10 +15,13 @@
       <DialogSection icon="squareSolid" :color="event.color">{{ event.name }}</DialogSection>
     </v-card-title>
     <v-card-text>
-      <DialogSection icon="calendar">{{ dateText }}</DialogSection>
+      <DialogSection icon="clock">{{ dateText }}</DialogSection>
     </v-card-text>
     <v-card-text>
       <DialogSection icon="textarea">{{ event.description || 'no description' }}</DialogSection>
+    </v-card-text>
+    <v-card-text>
+      <DialogSection icon="calendar">{{ event.calendar.name }}</DialogSection>
     </v-card-text>
     <div style="height: 52px"></div>
   </v-card>
