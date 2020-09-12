@@ -26,7 +26,7 @@
         <v-textarea filled rounded auto-grow v-model="description" placeholder="詳細" rows="4"></v-textarea>
       </DialogSection>
       <DialogSection icon="calendar">
-        <CalendarSelectForm v-model="calendar" />
+        <CalendarSelectForm :value="calendar" @input="changeCalendar($event)" />
       </DialogSection>
       <DialogSection icon="palette">
         <ColorForm v-model="color" />
@@ -101,6 +101,10 @@ export default {
       if (!this.event.id) {
         this.resetEvent();
       }
+    },
+    changeCalendar(calendar) {
+      this.color = calendar.color;
+      this.calendar = calendar;
     },
     submit() {
       if (this.$v.$invalid) {
