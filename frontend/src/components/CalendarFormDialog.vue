@@ -14,7 +14,7 @@
       </DialogSection>
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
-      <v-btn :disabled="$v.$invalid">保存</v-btn>
+      <v-btn :disabled="$v.$invalid" @click="submit">保存</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -45,9 +45,21 @@ export default {
     this.color = this.calendar.color;
   },
   methods: {
-    ...mapActions('calendars', ['resetCalendar']),
+    ...mapActions('calendars', ['createCalendar', 'resetCalendar']),
     close() {
       this.resetCalendar();
+    },
+    submit() {
+      if (this.$v.$invalid) {
+        return;
+      }
+      const params = {
+        ...this.calendar,
+        name: this.name,
+        color: this.color
+      };
+      this.createCalendar(params);
+      this.close();
     }
   }
 };
