@@ -20,7 +20,8 @@ export default new Vuetify({
       arrowLeft: 'mdi-chevron-left',
       arrowRight: 'mdi-chevron-right',
       arrowDown: 'fas fa-caret-down',
-      clock: 'far fa-clock'
+      clock: 'far fa-clock',
+      plus: 'fas fa-plus'
     }
   }
 });
