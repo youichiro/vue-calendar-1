@@ -22,7 +22,7 @@
             <v-icon size="12px" v-bind="attrs" v-on="on">$configMenu</v-icon>
           </template>
           <v-list>
-            <v-list-item>編集</v-list-item>
+            <v-list-item @click="edit(calendar)">編集</v-list-item>
             <v-list-item @click="del(calendar)">削除</v-list-item>
           </v-list>
         </v-menu>
@@ -51,6 +51,9 @@ export default {
     ...mapActions('calendars', ['fetchCalendars', 'updateCalendar', 'deleteCalendar', 'setCalendar']),
     toggleVisibility(calendar) {
       this.updateCalendar(calendar);
+    },
+    edit(calendar) {
+      this.setCalendar(calendar);
     },
     del(calendar) {
       this.deleteCalendar(calendar.id);
