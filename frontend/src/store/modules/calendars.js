@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const state = {
   calendars: [],
-  calendar: null
+  calendar: null,
+  isEditMode: false
 };
 
 const getters = {
@@ -15,7 +16,8 @@ const getters = {
       return null;
     }
     return { ...state.calendar, color: state.calendar.color || '#2196F3' };
-  }
+  },
+  isEditMode: state => state.isEditMode
 };
 
 const mutations = {
@@ -23,7 +25,10 @@ const mutations = {
   appendCalendar: (state, calendar) => (state.calendars = [...state.calendars, calendar]),
   updateCalendar: (state, calendar) =>
     (state.calendars = state.calendars.map(c => (c.id === calendar.id ? calendar : c))),
-  removeCalendar: (state, calendar) => (state.calendars = state.calendars.filter(c => c.id !== calendar.id))
+  removeCalendar: (state, calendar) => (state.calendars = state.calendars.filter(c => c.id !== calendar.id)),
+  setCalendar: (state, calendar) => (state.calendar = calendar),
+  resetCalendar: state => (state.calendar = null),
+  setEditMode: (state, bool) => (state.isEditMode = bool)
 };
 
 const actions = {
@@ -40,9 +45,19 @@ const actions = {
     commit('updateCalendar', response.data);
     dispatch('events/fetchEvents', null, { root: true });
   },
-  async deleteCalendar({ commit }, id) {
+  async deleteCalendar({ dispatch, commit }, id) {
     const response = await axios.delete(`http://localhost:3000/calendars/${id}`);
     commit('removeCalendar', response.data);
+    dispatch('events/fetchEvents', null, { root: true });
+  },
+  setCalendar({ commit }, calendar) {
+    commit('setCalendar', calendar);
+  },
+  resetCalendar({ commit }) {
+    commit('resetCalendar');
+  },
+  setEditMode({ commit }, bool) {
+    commit('setEditMode', bool);
   }
 };
 
