@@ -5,14 +5,38 @@
         <v-icon>$close</v-icon>
       </v-btn>
     </v-card-actions>
+    <v-card-text>
+      <DialogSection icon="squareSolid" :color="color">
+        <v-text-field autofocus v-model="name" label="カレンダー名" required></v-text-field>
+      </DialogSection>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import { validationMixin } from 'vuelidate';
+import { required } from 'vuelidate/lib/validators';
+import DialogSection from './DialogSection';
 
 export default {
   name: 'CalendarFormDialig',
+  mixins: [validationMixin],
+  components: { DialogSection },
+  validations: {
+    name: { required }
+  },
+  data: () => ({
+    name: '',
+    color: null
+  }),
+  computed: {
+    ...mapGetters('calendars', ['calendar'])
+  },
+  created() {
+    this.name = this.calendar.name;
+    this.color = this.calendar.color;
+  },
   methods: {
     ...mapActions('calendars', ['resetCalendar']),
     close() {
