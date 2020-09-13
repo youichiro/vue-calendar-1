@@ -2,8 +2,7 @@ import axios from 'axios';
 
 const state = {
   calendars: [],
-  calendar: null,
-  isEditMode: false
+  calendar: null
 };
 
 const getters = {
@@ -16,8 +15,7 @@ const getters = {
       return null;
     }
     return { ...state.calendar, color: state.calendar.color || '#2196F3' };
-  },
-  isEditMode: state => state.isEditMode
+  }
 };
 
 const mutations = {
@@ -27,8 +25,7 @@ const mutations = {
     (state.calendars = state.calendars.map(c => (c.id === calendar.id ? calendar : c))),
   removeCalendar: (state, calendar) => (state.calendars = state.calendars.filter(c => c.id !== calendar.id)),
   setCalendar: (state, calendar) => (state.calendar = calendar),
-  resetCalendar: state => (state.calendar = null),
-  setEditMode: (state, bool) => (state.isEditMode = bool)
+  resetCalendar: state => (state.calendar = null)
 };
 
 const actions = {
@@ -55,9 +52,6 @@ const actions = {
   },
   resetCalendar({ commit }) {
     commit('resetCalendar');
-  },
-  setEditMode({ commit }, bool) {
-    commit('setEditMode', bool);
   }
 };
 
