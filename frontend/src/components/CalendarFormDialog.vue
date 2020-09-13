@@ -13,6 +13,9 @@
         <ColorForm v-model="color" />
       </DialogSection>
     </v-card-text>
+    <v-card-actions class="d-flex justify-end">
+      <v-btn :disabled="$v.$invalid">保存</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
