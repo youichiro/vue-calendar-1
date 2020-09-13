@@ -1,10 +1,5 @@
 <template>
   <v-card light width="600">
-    <v-card-actions class="d-flex justify-end pa-2">
-      <v-btn icon @click="close">
-        <v-icon>$close</v-icon>
-      </v-btn>
-    </v-card-actions>
     <v-card-text>
       <DialogSection icon="squareSolid" :color="color">
         <v-text-field autofocus v-model="name" label="カレンダー名" required></v-text-field>
@@ -14,6 +9,7 @@
       </DialogSection>
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
+      <v-btn @click="close">キャンセル</v-btn>
       <v-btn :disabled="$v.$invalid" @click="submit">保存</v-btn>
     </v-card-actions>
   </v-card>
