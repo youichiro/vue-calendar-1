@@ -17,7 +17,15 @@
         ></v-checkbox>
       </v-list-item-content>
       <v-list-item-action>
-        <v-icon size="12px">$configMenu</v-icon>
+        <v-menu transition="scale-transition" offset-y min-width="100px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon size="12px" v-bind="attrs" v-on="on">$configMenu</v-icon>
+          </template>
+          <v-list>
+            <v-list-item>編集</v-list-item>
+            <v-list-item @click="del(calendar)">削除</v-list-item>
+          </v-list>
+        </v-menu>
       </v-list-item-action>
     </v-list-item>
   </v-list>
@@ -35,9 +43,12 @@ export default {
     this.fetchCalendars();
   },
   methods: {
-    ...mapActions('calendars', ['fetchCalendars', 'updateCalendar']),
+    ...mapActions('calendars', ['fetchCalendars', 'updateCalendar', 'deleteCalendar']),
     toggleVisibility(calendar) {
       this.updateCalendar(calendar);
+    },
+    del(calendar) {
+      this.deleteCalendar(calendar.id);
     }
   }
 };
