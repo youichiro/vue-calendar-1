@@ -1,8 +1,14 @@
 <template>
   <v-list dense>
-    <v-list-item v-for="(calendar, i) in calendars" :key="i" @click="toggleVisibility(calendar)">
+    <v-list-item v-for="(calendar, i) in calendars" :key="i">
       <v-list-item-content class="pa-0 ma-0">
-        <v-checkbox dense v-model="calendar.visibility" :color="calendar.color" :label="calendar.name"></v-checkbox>
+        <v-checkbox
+          dense
+          v-model="calendar.visibility"
+          :color="calendar.color"
+          :label="calendar.name"
+          @click="toggleVisibility(calendar)"
+        ></v-checkbox>
       </v-list-item-content>
     </v-list-item>
   </v-list>
@@ -22,11 +28,7 @@ export default {
   methods: {
     ...mapActions('calendars', ['fetchCalendars', 'updateCalendar']),
     toggleVisibility(calendar) {
-      const params = {
-        ...calendar,
-        visibility: !calendar.visibility
-      };
-      this.updateCalendar(params);
+      this.updateCalendar(calendar);
     }
   }
 };
