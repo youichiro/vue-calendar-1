@@ -36,7 +36,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import CalendarFormDialog from './CalendarFormDialog';
+import CalendarFormDialog from '../calendars/CalendarFormDialog';
 
 export default {
   name: 'CalendarList',

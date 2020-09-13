@@ -44,11 +44,11 @@ import moment from 'moment';
 import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
-import DateForm from './DateForm';
-import TimeForm from './TimeForm';
-import ColorForm from './ColorForm';
-import DialogSection from './DialogSection';
-import CalendarSelectForm from './CalendarSelectForm';
+import DateForm from '../forms/DateForm';
+import TimeForm from '../forms/TimeForm';
+import ColorForm from '../forms/ColorForm';
+import DialogSection from '../commons/DialogSection';
+import CalendarSelectForm from '../forms/CalendarSelectForm';
 
 export default {
   name: 'FormDialog',

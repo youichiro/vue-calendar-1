@@ -31,8 +31,8 @@
       </v-sheet>
     </v-sheet>
     <v-overlay :value="event !== null">
-      <DetailDialog v-if="!isEditMode" />
-      <FormDialog v-if="isEditMode" />
+      <EventDetailDialog v-if="!isEditMode" />
+      <EventFormDialog v-if="isEditMode" />
     </v-overlay>
     <v-overlay :value="clickedDate !== null">
       <MoreEvents />
@@ -43,14 +43,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import moment from 'moment';
-import DetailDialog from './DetailDialog';
-import FormDialog from './FormDialog';
-import MoreEvents from './MoreEvents';
-import CalendarList from './CalendarList';
+import EventDetailDialog from '../events/EventDetailDialog';
+import EventFormDialog from '../events/EventFormDialog';
+import MoreEvents from '../events/MoreEvents';
+import CalendarList from '../calendars/CalendarList';
 
 export default {
   name: 'Calendar',
-  components: { DetailDialog, FormDialog, MoreEvents, CalendarList },
+  components: { EventDetailDialog, EventFormDialog, MoreEvents, CalendarList },
   data: () => ({
     value: moment().format('YYYY-MM-DD')
   }),

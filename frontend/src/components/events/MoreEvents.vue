@@ -27,7 +27,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { formatDateToJa, formatTimeToJa } from '../functions/formatters';
+import { formatDateToJa, formatTimeToJa } from '../../functions/formatters';
 
 export default {
   name: 'MoreEvents',

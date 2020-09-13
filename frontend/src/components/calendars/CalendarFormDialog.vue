@@ -19,8 +19,8 @@
 import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
-import DialogSection from './DialogSection';
-import ColorForm from './ColorForm';
+import DialogSection from '../commons/DialogSection';
+import ColorForm from '../forms/ColorForm';
 
 export default {
   name: 'CalendarFormDialig',

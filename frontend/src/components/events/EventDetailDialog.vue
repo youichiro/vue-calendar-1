@@ -29,8 +29,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { eventDateFormatter } from '../functions/formatters';
-import DialogSection from './DialogSection';
+import { eventDateFormatter } from '../../functions/formatters';
+import DialogSection from '../commons/DialogSection';
 
 export default {
   name: 'Detail',

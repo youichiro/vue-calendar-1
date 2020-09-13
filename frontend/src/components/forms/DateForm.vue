@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { formatDateToJa } from '../functions/formatters';
+import { formatDateToJa } from '../../functions/formatters';
 
 export default {
   name: 'DateForm',
