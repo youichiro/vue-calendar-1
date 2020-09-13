@@ -3,7 +3,7 @@
     <v-list-item class="pr-0">
       <v-list-item-content class="caption">マイカレンダー</v-list-item-content>
       <v-list-item-action>
-        <v-icon size="12px" @click="initCalendar()">$plus</v-icon>
+        <v-icon size="12px" @click="init()">$plus</v-icon>
       </v-list-item-action>
     </v-list-item>
     <v-list-item v-for="(calendar, i) in calendars" :key="i" class="pr-0">
@@ -28,27 +28,38 @@
         </v-menu>
       </v-list-item-action>
     </v-list-item>
+    <v-overlay :value="calendar !== null">
+      <CalendarFormDialog />
+    </v-overlay>
   </v-list>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import CalendarFormDialog from './CalendarFormDialog';
 
 export default {
   name: 'CalendarList',
+  components: { CalendarFormDialog },
   computed: {
-    ...mapGetters('calendars', ['calendars'])
+    ...mapGetters('calendars', ['calendars', 'calendar'])
   },
   created() {
     this.fetchCalendars();
   },
   methods: {
-    ...mapActions('calendars', ['fetchCalendars', 'updateCalendar', 'deleteCalendar']),
+    ...mapActions('calendars', ['fetchCalendars', 'updateCalendar', 'deleteCalendar', 'setCalendar']),
     toggleVisibility(calendar) {
       this.updateCalendar(calendar);
     },
     del(calendar) {
       this.deleteCalendar(calendar.id);
+    },
+    init() {
+      this.setCalendar({
+        name: '',
+        visibility: true
+      });
     }
   }
 };
