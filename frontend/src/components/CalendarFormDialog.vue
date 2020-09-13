@@ -9,6 +9,9 @@
       <DialogSection icon="squareSolid" :color="color">
         <v-text-field autofocus v-model="name" label="カレンダー名" required></v-text-field>
       </DialogSection>
+      <DialogSection icon="palette">
+        <ColorForm v-model="color" />
+      </DialogSection>
     </v-card-text>
   </v-card>
 </template>
@@ -18,11 +21,12 @@ import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
 import DialogSection from './DialogSection';
+import ColorForm from './ColorForm';
 
 export default {
   name: 'CalendarFormDialig',
   mixins: [validationMixin],
-  components: { DialogSection },
+  components: { DialogSection, ColorForm },
   validations: {
     name: { required }
   },
