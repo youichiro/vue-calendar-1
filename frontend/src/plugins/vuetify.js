@@ -21,7 +21,8 @@ export default new Vuetify({
       arrowRight: 'mdi-chevron-right',
       arrowDown: 'fas fa-caret-down',
       clock: 'far fa-clock',
-      plus: 'fas fa-plus'
+      plus: 'fas fa-plus',
+      configMenu: 'fas fa-ellipsis-v'
     }
   }
 });
