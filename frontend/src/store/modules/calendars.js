@@ -35,9 +35,10 @@ const actions = {
     const response = await axios.post('http://localhost:3000/calendars', calendar);
     commit('appendCalendar', response.data);
   },
-  async updateCalendar({ commit }, calendar) {
+  async updateCalendar({ dispatch, commit }, calendar) {
     const response = await axios.put(`http://localhost:3000/calendars/${calendar.id}`, calendar);
     commit('updateCalendar', response.data);
+    dispatch('events/fetchEvents', null, { root: true });
   },
   async deleteCalendar({ commit }, id) {
     const response = await axios.delete(`http://localhost:3000/calendars/${id}`);
