@@ -25,3 +25,9 @@ export const getTimeIntervalList = (intervalNum = 15, intervalUnit = 'minutes') 
   }
   return times;
 };
+
+export const isGreaterEndThanStart = (startDate, startTime, endDate, endTime, allDay) => {
+  const start = moment(`${startDate} ${startTime}`);
+  const end = moment(`${endDate} ${endTime}`);
+  return allDay ? end >= start : end > start;
+};

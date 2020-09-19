@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import moment from 'moment';
 import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
@@ -49,6 +48,7 @@ import TimeForm from '../forms/TimeForm';
 import ColorForm from '../forms/ColorForm';
 import DialogSection from '../commons/DialogSection';
 import CalendarSelectForm from '../forms/CalendarSelectForm';
+import { isGreaterEndThanStart } from '../../functions/datetime';
 
 export default {
   name: 'FormDialog',
@@ -74,9 +74,7 @@ export default {
   computed: {
     ...mapGetters('events', ['event']),
     isGreaterEnd() {
-      const start = this.allDay ? moment(this.startDate) : moment(`${this.startDate} ${this.startTime}`);
-      const end = this.allDay ? moment(this.endDate) : moment(`${this.endDate} ${this.endTime}`);
-      return this.allDay ? end >= start : end > start;
+      return isGreaterEndThanStart(this.startDate, this.startTime, this.endDate, this.endTime, this.allDay);
     }
   },
   created() {
