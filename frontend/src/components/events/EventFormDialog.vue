@@ -112,7 +112,7 @@ export default {
         ...this.event,
         name: this.name,
         start: `${this.startDate} ${this.startTime || ''}`,
-        end: `${this.endDate} ${this.endTime | ''}`,
+        end: `${this.endDate} ${this.endTime || ''}`,
         timed: !this.allDay,
         description: this.description,
         color: this.color,
