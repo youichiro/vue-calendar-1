@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { format } from 'date-fns';
 
 export const serializeEvent = event => {
   if (event === null) {
@@ -11,9 +11,9 @@ export const serializeEvent = event => {
     start,
     end,
     color: event.color || '#2196F3',
-    startDate: moment(event.start).format('YYYY-MM-DD'),
-    startTime: event.timed ? moment(event.start).format('HH:mm') : null,
-    endDate: moment(event.end).format('YYYY-MM-DD'),
-    endTime: event.timed ? moment(event.end).format('HH:mm') : null
+    startDate: format(start, 'yyyy-MM-dd'),
+    startTime: event.timed ? format(start, 'HH:mm') : null,
+    endDate: format(end, 'yyyy-MM-dd'),
+    endTime: event.timed ? format(end, 'HH:mm') : null
   };
 };
