@@ -2,6 +2,8 @@ import axios from 'axios';
 import { serializeEvent } from '../../functions/serializers';
 import { filterEventsByDate } from '../../functions/filters';
 
+const apiUrl = process.env.VUE_APP_API_URL;
+
 const state = {
   events: [],
   event: null,
@@ -30,20 +32,20 @@ const mutations = {
 
 const actions = {
   async fetchEvents({ commit }) {
-    const response = await axios.get('http://localhost:3000/events');
+    const response = await axios.get(`${apiUrl}/events`);
     commit('setEvents', response.data);
   },
   async deleteEvent({ commit }, id) {
-    const response = await axios.delete(`http://localhost:3000/events/${id}`);
+    const response = await axios.delete(`${apiUrl}/events/${id}`);
     commit('removeEvent', response.data);
     commit('resetEvent');
   },
   async updateEvent({ commit }, event) {
-    const response = await axios.put(`http://localhost:3000/events/${event.id}`, event);
+    const response = await axios.put(`${apiUrl}/events/${event.id}`, event);
     commit('updateEvent', response.data);
   },
   async createEvent({ commit }, event) {
-    const response = await axios.post('http://localhost:3000/events', event);
+    const response = await axios.post(`${apiUrl}/events`, event);
     commit('appendEvent', response.data);
   },
   setEvent({ commit }, event) {

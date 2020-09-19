@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const apiUrl = process.env.VUE_APP_API_URL;
+
 const state = {
   calendars: [],
   calendar: null
@@ -30,20 +32,20 @@ const mutations = {
 
 const actions = {
   async fetchCalendars({ commit }) {
-    const response = await axios.get('http://localhost:3000/calendars');
+    const response = await axios.get(`${apiUrl}/calendars`);
     commit('setCalendars', response.data);
   },
   async createCalendar({ commit }, calendar) {
-    const response = await axios.post('http://localhost:3000/calendars', calendar);
+    const response = await axios.post(`${apiUrl}/calendars`, calendar);
     commit('appendCalendar', response.data);
   },
   async updateCalendar({ dispatch, commit }, calendar) {
-    const response = await axios.put(`http://localhost:3000/calendars/${calendar.id}`, calendar);
+    const response = await axios.put(`${apiUrl}/calendars/${calendar.id}`, calendar);
     commit('updateCalendar', response.data);
     dispatch('events/fetchEvents', null, { root: true });
   },
   async deleteCalendar({ dispatch, commit }, id) {
-    const response = await axios.delete(`http://localhost:3000/calendars/${id}`);
+    const response = await axios.delete(`${apiUrl}/calendars/${id}`);
     commit('removeCalendar', response.data);
     dispatch('events/fetchEvents', null, { root: true });
   },
