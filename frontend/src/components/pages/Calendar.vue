@@ -42,22 +42,22 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import moment from 'moment';
 import EventDetailDialog from '../events/EventDetailDialog';
 import EventFormDialog from '../events/EventFormDialog';
 import MoreEvents from '../events/MoreEvents';
 import CalendarList from '../calendars/CalendarList';
+import { getCurrectDateStr, formatDateToMonthlyStr, getDefaultStartAndEnd } from '../../functions/datetime';
 
 export default {
   name: 'Calendar',
   components: { EventDetailDialog, EventFormDialog, MoreEvents, CalendarList },
   data: () => ({
-    value: moment().format('YYYY-MM-DD')
+    value: getCurrectDateStr()
   }),
   computed: {
     ...mapGetters('events', ['events', 'event', 'isEditMode', 'clickedDate']),
     title() {
-      return moment(this.value).format('YYYY年 M月');
+      return formatDateToMonthlyStr(this.value);
     }
   },
   methods: {
@@ -66,7 +66,7 @@ export default {
       return event.color;
     },
     setToday() {
-      this.value = moment().format('YYYY-MM-DD');
+      this.value = getCurrectDateStr();
     },
     showEvent({ nativeEvent, event }) {
       this.setEvent(event);
@@ -76,14 +76,8 @@ export default {
       if (this.clickedDate !== null) {
         return;
       }
-      const currentTime = moment().format('HH:mm:ss');
-      let datetime = moment(`${date} ${currentTime}`);
-      this.setEvent({
-        name: '',
-        start: `${datetime.add(1, 'h').format('YYYY-MM-DD HH')}:00:00`,
-        end: `${datetime.add(1, 'h').format('YYYY-MM-DD HH')}:00:00`,
-        timed: true
-      });
+      const [start, end] = getDefaultStartAndEnd(date);
+      this.setEvent({ name: '', start, end, timed: true });
       this.setEditMode(true);
     },
     showMoreEvents({ date }) {
