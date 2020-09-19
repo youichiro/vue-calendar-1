@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import { getTimeIntervalList } from '../../functions/datetime';
 
 export default {
   name: 'TimeForm',
@@ -27,13 +27,7 @@ export default {
       }
     },
     times() {
-      const start = moment('2020-08-01 00:00:00');
-      const end = moment('2020-08-01 24:00:00');
-      let times = [];
-      for (let target = start.clone(); target.isBefore(end); target.add(15, 'minutes')) {
-        times.push(target.format('HH:mm'));
-      }
-      return times;
+      return getTimeIntervalList();
     }
   }
 };

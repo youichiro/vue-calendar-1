@@ -15,3 +15,13 @@ export const getDefaultStartAndEnd = date => {
   const end = `${datetime.add(1, 'h').format('YYYY-MM-DD HH')}:00:00`;
   return [start, end];
 };
+
+export const getTimeIntervalList = (intervalNum = 15, intervalUnit = 'minutes') => {
+  const start = moment('2020-08-01 00:00:00');
+  const end = moment('2020-08-01 24:00:00');
+  let times = [];
+  for (let target = start.clone(); target.isBefore(end); target.add(intervalNum, intervalUnit)) {
+    times.push(target.format('HH:mm'));
+  }
+  return times;
+};
