@@ -1,4 +1,5 @@
 import { format, addHours, addMinutes, isBefore } from 'date-fns';
+import { ja } from 'date-fns/locale';
 
 export const getCurrectDateStr = () => {
   return format(new Date(), 'yyyy-MM-dd');
@@ -6,6 +7,37 @@ export const getCurrectDateStr = () => {
 
 export const formatDateToMonthlyStr = date => {
   return format(new Date(date), 'yyyy年 M月');
+};
+
+export const formatDateToJa = date => {
+  // date: '2020-10-01'
+  // return: '10月1日 (水)'
+  return format(new Date(date), 'M月d日 (E)', { locale: ja });
+};
+
+export const formatTimeToJa = time => {
+  // time: '09:00'
+  // return: '9時'
+  return format(new Date(`2020-08-01 ${time}`), 'H時');
+};
+
+export const eventDateFormatter = event => {
+  // 8月10日(月)
+  // 8月10日(月) 〜 11日(火)
+  // 8月10日(月) 13:00 〜 14:00
+  // 8月10日(月) 10:00 〜 8月11日(火) 11:00
+  if (!event.timed && event.startDate === event.endDate) {
+    return format(event.start, 'M月d日(E)', { locale: ja });
+  }
+  if (!event.timed) {
+    return format(event.start, 'M月d日(E) ~ ', { locale: ja }) + format(event.end, 'd日(E)', { locale: ja });
+  }
+  if (event.startDate === event.endDate) {
+    return format(event.start, 'M月d日(E) HH:mm ~ ', { locale: ja }) + format(event.end, 'HH:mm');
+  }
+  return (
+    format(event.start, 'M月d日(E) HH:mm ~ ', { locale: ja }) + format(event.end, 'M月d日(E) HH:mm', { locale: ja })
+  );
 };
 
 export const getDefaultStartAndEnd = date => {

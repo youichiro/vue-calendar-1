@@ -29,7 +29,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { eventDateFormatter } from '../../functions/formatters';
+import { eventDateFormatter } from '../../functions/datetime';
 import DialogSection from '../commons/DialogSection';
 
 export default {
