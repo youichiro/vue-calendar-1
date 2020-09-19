@@ -1,12 +1,11 @@
-import moment from 'moment';
+import { isWithinInterval } from 'date-fns';
 import { serializeEvent } from './serializers';
 
 export const filterEventsByDate = (events, date) => {
   return events
     .map(event => serializeEvent(event))
-    .filter(
-      event =>
-        event.startDate === date || event.endDate === date || moment(date).isBetween(event.startDate, event.endDate)
+    .filter(event =>
+      isWithinInterval(new Date(date), { start: new Date(event.startDate), end: new Date(event.endDate) })
     )
     .sort((a, b) => {
       if (a.start < b.start) return -1;
