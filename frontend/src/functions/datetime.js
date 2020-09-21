@@ -18,7 +18,7 @@ export const formatDateToJa = date => {
 export const formatTimeToJa = time => {
   // time: '09:00'
   // return: '9時'
-  return format(new Date(`2020-08-01 ${time}`), 'H時');
+  return format(new Date(`2020-08-01 ${time}`), 'H:mm');
 };
 
 export const eventDateFormatter = event => {
