@@ -12,8 +12,8 @@ export const serializeEvent = event => {
     end,
     color: event.color || '#2196F3',
     startDate: format(start, 'yyyy-MM-dd'),
-    startTime: event.timed ? format(start, 'HH:mm') : null,
+    startTime: format(start, 'HH:mm'),
     endDate: format(end, 'yyyy-MM-dd'),
-    endTime: event.timed ? format(end, 'HH:mm') : null
+    endTime: format(end, 'HH:mm')
   };
 };
