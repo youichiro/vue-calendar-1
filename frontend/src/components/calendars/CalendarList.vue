@@ -7,7 +7,7 @@
       </v-list-item-action>
     </v-list-item>
     <v-list-item v-for="(calendar, i) in calendars" :key="i" class="pr-0">
-      <v-list-item-content class="pa-0 ma-0">
+      <v-list-item-content>
         <v-checkbox
           dense
           v-model="calendar.visibility"
